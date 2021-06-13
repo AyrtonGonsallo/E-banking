@@ -1,5 +1,7 @@
 package com.projetJEE.Ebanking.Dao;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +21,8 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 	@Query("select c.id from Client c where c.username like :u and c.password like :p")
 	public Long chercher(@Param("u") String username,@Param("p") String password );
 	//http://localhost:8080/clients/search/up?u=admin&p=madagascar
+	
+	Optional<Client> findByUsername(String username);
+
+	Optional<Client> findByCin(String username);
 }

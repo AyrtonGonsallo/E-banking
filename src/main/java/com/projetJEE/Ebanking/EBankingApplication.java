@@ -73,7 +73,7 @@ public class EBankingApplication implements CommandLineRunner {
 		String[] passwords={"madagascar","allen","jones"};
 		
 		//pour recuperer le id des articles 
-		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class);
+		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class,Agence.class);
 		List<Client>clients=new ArrayList<Client>();
 		List<Agent>agents=new ArrayList<Agent>();
 		List<Compte>comptes1=new ArrayList<Compte>();
@@ -153,6 +153,7 @@ public class EBankingApplication implements CommandLineRunner {
 			for(Agent ag:agents){
 				ag.setAgence(agence1);
 				ag.setCreationAdmin(admin2);
+				agentR.save(ag);
 			}
 		
 		//creer les comptes 
