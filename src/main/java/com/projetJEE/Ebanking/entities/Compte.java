@@ -61,13 +61,13 @@ public class Compte {
 	@ToString.Exclude
 	@JsonIgnore
 	@Column(name="VIREMENTS_ENVOYES_COMPTE")
-	@OneToMany(mappedBy="debiteur",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="creancier",cascade=CascadeType.ALL)
 	List<Virement> virementsEnvoyes;
 	
 	@ToString.Exclude
 	@JsonIgnore
 	@Column(name="VIREMENTS_RECUS_COMPTE")
-	@OneToMany(mappedBy="creancier",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="debiteur",cascade=CascadeType.ALL)
 	List<Virement> virementsRecus;
 	
 	@JsonIgnore

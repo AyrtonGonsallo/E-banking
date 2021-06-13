@@ -25,6 +25,7 @@ import com.projetJEE.Ebanking.entities.Agent;
 import com.projetJEE.Ebanking.entities.Client;
 import com.projetJEE.Ebanking.entities.Compte;
 import com.projetJEE.Ebanking.entities.Devise;
+import com.projetJEE.Ebanking.entities.Operateur;
 import com.projetJEE.Ebanking.entities.Operation;
 import com.projetJEE.Ebanking.entities.Recharge;
 import com.projetJEE.Ebanking.entities.Virement;
@@ -72,7 +73,7 @@ public class EBankingApplication implements CommandLineRunner {
 		String[] passwords={"madagascar","allen","jones"};
 		
 		//pour recuperer le id des articles 
-		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class);
+		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class);
 		List<Client>clients=new ArrayList<Client>();
 		List<Agent>agents=new ArrayList<Agent>();
 		List<Compte>comptes1=new ArrayList<Compte>();
@@ -96,6 +97,9 @@ public class EBankingApplication implements CommandLineRunner {
 		List<Operation>operations2=new ArrayList<Operation>();
 		List<Operation>operations3=new ArrayList<Operation>();
 		
+		List<Recharge>recharges1=new ArrayList<Recharge>();
+		List<Recharge>recharges2=new ArrayList<Recharge>();
+		List<Recharge>recharges3=new ArrayList<Recharge>();
 		
 		//creer les client
 		for(int i=0;i<noms.length;i++){
@@ -153,21 +157,37 @@ public class EBankingApplication implements CommandLineRunner {
 		
 		//creer les comptes 
 			//devise
-			Devise d=new Devise(1L,"zez","Dollar","english","","","","",null,admin2,null,admin1);
+			Devise d=new Devise(1L,"$","Dollar","english","","","","",null,admin2,null,admin1);
+			Devise d2=new Devise(2L,"R","Roupie","english","","","","",null,admin2,null,admin1);
+			Devise d3=new Devise(3L,"€","Euro","francais","","","","",null,admin2,null,admin1);
+			Devise d4=new Devise(4L,"£","Deutshe Mark","allemand","","","","",null,admin2,null,admin1);
 			deviseR.save(d);
+			deviseR.save(d2);
+			deviseR.save(d3);
+			deviseR.save(d4);
 			
 				
+			Compte compte=new Compte(1L,RandomString.make(10),"epargne",2000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
+			comptes1.add(compte);
+			clients.get(0).setComptes(comptes1);
+			clients.get(0).setAgence(agence1);
+			clients.get(0).setCreationAgent(agents.get(0));
+			
+		clientR.save(clients.get(0));	
 				
-				
-				Compte compte2=new Compte(1L,RandomString.make(10),"epargne",9000.0,d,null,clients.get(1),agents.get(1),null,null,null,null);
+				Compte compte2=new Compte(2L,RandomString.make(10),"epargne",9000.0,d2,null,clients.get(1),agents.get(1),null,null,null,null);
+				Compte compte2_2=new Compte(3L,RandomString.make(10),"courant",2000.0,d2,null,clients.get(1),agents.get(0),null,null,null,null);
+				Compte compte2_3=new Compte(4L,RandomString.make(10),"credit",3000.0,d2,null,clients.get(1),agents.get(2),null,null,null,null);
 				comptes2.add(compte2);
+				comptes2.add(compte2_2);
+				comptes2.add(compte2_3);
 				clients.get(1).setComptes(comptes2);
 				clients.get(1).setAgence(agence1);
 				clients.get(1).setCreationAgent(agents.get(1));
 			clientR.save(clients.get(1));
 			
 			
-			Compte compte3=new Compte(2L,RandomString.make(10),"epargne",4000.0,d,null,clients.get(2),agents.get(2),null,null,null,null);
+			Compte compte3=new Compte(5L,RandomString.make(10),"epargne",4000.0,d3,null,clients.get(2),agents.get(2),null,null,null,null);
 			comptes3.add(compte3);
 			clients.get(2).setComptes(comptes3);
 			clients.get(2).setAgence(agence1);
@@ -175,29 +195,22 @@ public class EBankingApplication implements CommandLineRunner {
 			
 		clientR.save(clients.get(2));
 			
-			Compte compte=new Compte(3L,RandomString.make(10),"epargne",2000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
-			comptes1.add(compte);
-			clients.get(0).setComptes(comptes1);
-			clients.get(0).setAgence(agence1);
-			clients.get(0).setCreationAgent(agents.get(0));
 			
-		clientR.save(clients.get(0));
 		
 				
 			
-			//Virement ENVOYES
-			Virement ve1=new Virement(1L,compte,compte3,null,1200.0,1200.0);
-			Virement ve2=new Virement(2L,compte,compte2,null,1500.0,1500.0);
+			//Virement 
+			Virement v1=new Virement(1L,compte,compte3,null,1200.0,1200.0);
+			Virement v2=new Virement(2L,compte,compte2,null,1500.0,1500.0);
+			virementR.save(v1);
+			virementR.save(v2);
 			
-			//virements RECUS
-			Virement vr1=new Virement(3L,compte3,compte,null,1200.0,1200.0);
-			Virement vr2=new Virement(4L,compte3,compte,null,1500.0,1500.0);
 			
 			
 			//operation
 			Operation op1=new Operation(1L,compte,null,2000.0,1999.0,"recharge",d);
-			Operation op2=new Operation(2L,compte,null,2000.0,1999.0,"recharge",d);
-			Operation op3=new Operation(3L,compte,null,2000.0,1999.0,"recharge",d);
+			Operation op2=new Operation(2L,compte,null,2000.0,1999.0,"recharge",d2);
+			Operation op3=new Operation(3L,compte,null,2000.0,1999.0,"recharge",d3);
 			Operation op4=new Operation(4L,compte2,null,2000.0,1999.0,"recharge",d);
 			Operation op5=new Operation(5L,compte3,null,2000.0,1999.0,"recharge",d);
 			operations1.add(op1);
@@ -206,17 +219,14 @@ public class EBankingApplication implements CommandLineRunner {
 			operations2.add(op4);
 			operations3.add(op5);
 			
-			virements_envoyés1.add(ve1);
-			virements_envoyés1.add(ve2);
+			virements_envoyés1.add(v1);
+			virements_envoyés1.add(v2);
 			
 			
-			virements_recus2.add(vr1);
-			virements_recus3.add(vr2);
+			virements_recus2.add(v2);
+			virements_recus3.add(v1);
 			
-			
-			
-			
-			
+				
 				compte.setVirementsEnvoyes(virements_envoyés1);
 				compte2.setVirementsRecus(virements_recus2);
 				compte3.setVirementsRecus(virements_recus3);
@@ -229,15 +239,41 @@ public class EBankingApplication implements CommandLineRunner {
 			operationR.save(op4);
 			operationR.save(op5);
 			
-			virementR.save(vr1);
-			virementR.save(vr2);
-			virementR.save(ve1);
-			virementR.save(ve2);
-			compteR.save(compte);
-			compteR.save(compte3);
-			compteR.save(compte2);
+			
+			
+		
+	
+		Operateur o1=new Operateur();
+		o1.setRole(RandomString.make(10));
+		o1.setUsername(RandomString.make(10));
+		o1.setPassword(RandomString.make(10));
+		
+		Operateur o2=new Operateur();
+		o2.setRole(RandomString.make(10));
+		o2.setUsername(RandomString.make(10));
+		o2.setPassword(RandomString.make(10));
+		operateurR.save(o1);
+		operateurR.save(o2);
+		Recharge r1=new Recharge(1L,3000.0,2950.0,d2,"",null,compte,o1);
+		Recharge r2=new Recharge(2L,9000.0,8950.0,d3,"",null,compte,o1);
+		Recharge r3=new Recharge(3L,5000.0,4950.0,d,"",null,compte3,o1);
+		Recharge r4=new Recharge(4L,4000.0,3950.0,d4,"",null,compte2,o1);
+		rechargeR.save(r1);
+		rechargeR.save(r2);
+		rechargeR.save(r3);
+		rechargeR.save(r4);
+		recharges1.add(r1);
+		recharges1.add(r2);
+		recharges2.add(r4);
+		recharges3.add(r3);
 		
 		
+		
+		compteR.save(compte);
+		compteR.save(compte3);
+		compteR.save(compte2);
+		
+	
 		
 		
 		
