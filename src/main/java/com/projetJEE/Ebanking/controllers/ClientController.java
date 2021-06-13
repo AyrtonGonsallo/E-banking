@@ -9,7 +9,7 @@ import com.projetJEE.Ebanking.entities.*;
 import com.projetJEE.Ebanking.exceptions.*;
 import com.projetJEE.Ebanking.services.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 public class ClientController {
 	
@@ -45,11 +45,12 @@ public class ClientController {
 		
 		
 		//POST
-			
-			@RequestMapping(value = "/clients/save" , method = RequestMethod.POST, consumes = { "multipart/form-data" })
+			 
+			@RequestMapping(value = "/clients/save" , method = RequestMethod.POST, consumes = { "multipart/form-data"})//,"multipart/form-data" ,"application/json"
 			@ResponseStatus(HttpStatus.CREATED)
-			public void addClient(@RequestBody Client client)  throws AlreadyExistsException
+			public void addClient( Client client)  throws AlreadyExistsException
 			{
+				
 				service.addClient(client);
 			}
 		

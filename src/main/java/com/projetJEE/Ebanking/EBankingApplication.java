@@ -109,6 +109,7 @@ public class EBankingApplication implements CommandLineRunner {
 			c.setEmail("paul@gmail.com");
 			c.setPrenom(prenoms[i]);
 			c.setPassword(passwords[i]);
+			c.setCin(RandomString.make(15));
 			c.setUsername(usernames[i]);
 			c.setRole("");
 			c.setComptes(comptes.get(i));
@@ -253,8 +254,11 @@ public class EBankingApplication implements CommandLineRunner {
 		o2.setRole(RandomString.make(10));
 		o2.setUsername(RandomString.make(10));
 		o2.setPassword(RandomString.make(10));
+		o1.setCin(RandomString.make(15));
+		o2.setCin(RandomString.make(15));
 		operateurR.save(o1);
 		operateurR.save(o2);
+		
 		Recharge r1=new Recharge(1L,3000.0,2950.0,d2,"",null,compte,o1);
 		Recharge r2=new Recharge(2L,9000.0,8950.0,d3,"",null,compte,o1);
 		Recharge r3=new Recharge(3L,5000.0,4950.0,d,"",null,compte3,o1);

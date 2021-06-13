@@ -83,10 +83,10 @@ public class ClientService {
 		
 		String password= client.getPassword();
 		
-		client.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
+		client.setPassword(new BCryptPasswordEncoder().encode(password));
 		client.setRole("Client");
 		
-		Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Agent agent = agentService.getByUsername("alain");
 		
 		client.setCreationAgent(agent);
 		Agence agence = agenceService.getAgences(agent.getAgence().getId()).get(0);
@@ -95,13 +95,13 @@ public class ClientService {
 		
 		rep.save(client);
 		
-		if(!client.getEmail().isEmpty() && client.getEmail()!=null)
-		{
-			client.setPassword(password);
+		//if(!client.getEmail().isEmpty() && client.getEmail()!=null)
+		//{
+		//	client.setPassword(password);
 //			emailService.sendAuthenticationInfos(client);
-		}
+	//	}
 		
-		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a créé le client avec le username "+client.getUsername());
+	//	logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a créé le client avec le username "+client.getUsername());
 		
 		
 		
