@@ -67,10 +67,10 @@ public class EBankingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		String[] noms={"Dark","Allen","Jones"};
-		String[] prenoms={"Marco","Paul","Alain"};
-		String[] usernames={"admin","allen","jones"};
-		String[] passwords={"madagascar","allen","jones"};
+		String[] noms={"Dark","Allen","Jones",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+		String[] prenoms={"Marco","Paul","Alain",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+		String[] usernames={"admin","allen","jones",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+		String[] passwords={"madagascar","allen","jones",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
 		
 		//pour recuperer le id des articles 
 		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class,Agence.class);
@@ -79,10 +79,18 @@ public class EBankingApplication implements CommandLineRunner {
 		List<Compte>comptes1=new ArrayList<Compte>();
 		List<Compte>comptes2=new ArrayList<Compte>();
 		List<Compte>comptes3=new ArrayList<Compte>();
+		List<Compte>comptes4=new ArrayList<Compte>();
+		List<Compte>comptes5=new ArrayList<Compte>();
+		List<Compte>comptes6=new ArrayList<Compte>();
+		List<Compte>comptes7=new ArrayList<Compte>();
 		List<List<Compte>>comptes=new ArrayList<List<Compte>>();
 		comptes.add(comptes1);
 		comptes.add(comptes2);
 		comptes.add(comptes3);
+		comptes.add(comptes4);
+		comptes.add(comptes5);
+		comptes.add(comptes6);
+		comptes.add(comptes7);
 		List<Virement>virements_envoyés1=new ArrayList<Virement>();
 		List<Virement>virements_envoyés2=new ArrayList<Virement>();
 		List<Virement>virements_envoyés3=new ArrayList<Virement>();
@@ -106,12 +114,12 @@ public class EBankingApplication implements CommandLineRunner {
 			Client c=new Client("oui",null,null,null);
 			c.setNom(noms[i]);
 			c.setAdresse(RandomString.make(15));
-			c.setEmail("paul@gmail.com");
+			c.setEmail(RandomString.make(10)+"@gmail.com");
 			c.setPrenom(prenoms[i]);
 			c.setPassword(passwords[i]);
-			c.setCin(RandomString.make(15));
+			c.setCin("MM"+RandomString.make(10));
 			c.setUsername(usernames[i]);
-			c.setRole("");
+			c.setRole("client");
 			c.setComptes(comptes.get(i));
 			clientR.save(c);
 			clients.add(c);
@@ -133,10 +141,10 @@ public class EBankingApplication implements CommandLineRunner {
 			//creer une agence
 			Agence 	agence1=new Agence(1L,"principale","","","","",admin1,null,clients);
 		//creer des agents
-			String[] nomsA={"karl","Allen","Jonzdzes"};
-			String[] prenomsA={"marcos","Paul","dqsn"};
-			String[] usernamesA={"alain","sddallen","jonesdss"};
-			String[] passwordsA={"delon","dssallen","dsjones"};
+			String[] nomsA={"karl","Allen","Jonzdzes",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+			String[] prenomsA={"marcos","Paul","dqsn",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+			String[] usernamesA={"alain","sddallen","jonesdss",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
+			String[] passwordsA={"delon","dssallen","dsjones",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
 			for(int i=0;i<nomsA.length;i++){
 				Agent agent=new Agent(null,null);
 				agent.setPassword(passwordsA[i]);
@@ -196,6 +204,15 @@ public class EBankingApplication implements CommandLineRunner {
 			clients.get(2).setCreationAgent(agents.get(2));
 			
 		clientR.save(clients.get(2));
+		
+		for (int j=3;j<clients.size();j++){
+			Compte nv_compte=new Compte((long)6+j,RandomString.make(10),"epargne",2000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
+			comptes.get(j).add(nv_compte);
+			clients.get(j).setComptes(comptes.get(j));
+			clients.get(j).setAgence(agence1);
+			clients.get(j).setCreationAgent(agents.get(0));
+			clientR.save(clients.get(j));
+		}
 			
 			
 		

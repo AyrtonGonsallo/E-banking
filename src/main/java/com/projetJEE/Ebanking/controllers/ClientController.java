@@ -46,11 +46,10 @@ public class ClientController {
 		
 		//POST
 			 
-			@RequestMapping(value = "/clients/save" , method = RequestMethod.POST, consumes = { "multipart/form-data"})//,"multipart/form-data" ,"application/json"
+			@RequestMapping(value = "/clients/save" , method = RequestMethod.POST, consumes = { "application/json"})//"multipart/form-data" ,"application/json"
 			@ResponseStatus(HttpStatus.CREATED)
-			public void addClient( Client client)  throws AlreadyExistsException
+			public void addClient(@RequestBody Client client)  throws AlreadyExistsException
 			{
-				
 				service.addClient(client);
 			}
 		
