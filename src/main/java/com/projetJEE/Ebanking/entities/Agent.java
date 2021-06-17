@@ -1,0 +1,61 @@
+package com.projetJEE.Ebanking.entities;
+
+import javax.persistence.*;
+
+import lombok.*;
+
+@Entity
+@Table(name="AGENT")
+@AttributeOverrides({
+    @AttributeOverride(name = "id", column = @Column(name = "ID_AGENT")),
+    @AttributeOverride(name = "nom", column = @Column(name = "NOM_AGENT")),
+    @AttributeOverride(name = "prenom", column = @Column(name = "PRENOM_AGENT")),
+    @AttributeOverride(name = "cin", column = @Column(name = "CIN_AGENT")),
+    @AttributeOverride(name = "adresse", column = @Column(name = "ADRESSE_AGENT")),
+    @AttributeOverride(name = "telephone", column = @Column(name = "TELEPHONE_AGENT")),
+    @AttributeOverride(name = "email", column = @Column(name = "EMAIL_AGENT")),
+    @AttributeOverride(name = "username", column = @Column(name = "USERNAME_AGENT")),
+    @AttributeOverride(name = "password", column = @Column(name = "PASSWORD_AGENT")),
+    @AttributeOverride(name = "role", column = @Column(name = "ROLE_AGENT"))
+})
+@Data @NoArgsConstructor @AllArgsConstructor @ToString
+public class Agent extends Utilisateur{
+	
+	@ManyToOne
+	@JoinColumn(name="CREATION_ADMIN_AGENT")
+	Admin creationAdmin;
+	
+	@ToString.Exclude
+	@JoinColumn(name="AGENCE_AGENT")
+	@ManyToOne
+	Agence agence;
+
+	public Agent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Agent(Admin creationAdmin, Agence agence) {
+		super();
+		this.creationAdmin = creationAdmin;
+		this.agence = agence;
+	}
+
+	public Admin getCreationAdmin() {
+		return creationAdmin;
+	}
+
+	public void setCreationAdmin(Admin creationAdmin) {
+		this.creationAdmin = creationAdmin;
+	}
+
+	public Agence getAgence() {
+		return agence;
+	}
+
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
+	
+	
+}
