@@ -26,7 +26,7 @@ public class ClientController {
 			
 			
 			
-			@GetMapping("/client/username/{username}")
+			@GetMapping("/clients/username/{username}")
 			@ResponseStatus(HttpStatus.OK)
 			public Client getByUsername(@PathVariable(name="username") String username)
 			{
@@ -35,12 +35,12 @@ public class ClientController {
 			
 			
 			
-			@GetMapping("/client/{id}/comptes")
+			/*@GetMapping("/clients/{id}/comptes")
 			@ResponseStatus(HttpStatus.OK)
 			public List<Compte> getComptes(@PathVariable(name="id") Long id) throws NotFoundException
 			{
 				return service.getComptes(id);
-			}
+			}*/
 			
 		
 		
@@ -57,7 +57,7 @@ public class ClientController {
 		
 		//PUT
 			
-			@PutMapping("/client/{id}")
+			@PutMapping("/clients/update/{id}")
 			@ResponseStatus(HttpStatus.OK)
 			public void updateClient(@PathVariable(name="id") Long id , @RequestBody(required=false) Client client)  throws NotFoundException, AlreadyExistsException
 			{

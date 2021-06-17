@@ -206,7 +206,7 @@ public class EBankingApplication implements CommandLineRunner {
 		clientR.save(clients.get(2));
 		
 		for (int j=3;j<clients.size();j++){
-			Compte nv_compte=new Compte((long)6+j,RandomString.make(10),"epargne",2000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
+			Compte nv_compte=new Compte((long)6+j,RandomString.make(10),"epargne",2000.0*j,d,null,clients.get(j),agents.get(1),null,null,null,null);
 			comptes.get(j).add(nv_compte);
 			clients.get(j).setComptes(comptes.get(j));
 			clients.get(j).setAgence(agence1);
@@ -228,8 +228,8 @@ public class EBankingApplication implements CommandLineRunner {
 			
 			//operation
 			Operation op1=new Operation(1L,compte,null,2000.0,1999.0,"recharge",d);
-			Operation op2=new Operation(2L,compte,null,2000.0,1999.0,"recharge",d2);
-			Operation op3=new Operation(3L,compte,null,2000.0,1999.0,"recharge",d3);
+			Operation op2=new Operation(2L,compte,null,3000.0,2999.0,"recharge",d2);
+			Operation op3=new Operation(3L,compte,null,4000.0,3999.0,"recharge",d3);
 			Operation op4=new Operation(4L,compte2,null,2000.0,1999.0,"recharge",d);
 			Operation op5=new Operation(5L,compte3,null,2000.0,1999.0,"recharge",d);
 			operations1.add(op1);
@@ -266,15 +266,45 @@ public class EBankingApplication implements CommandLineRunner {
 		o1.setRole(RandomString.make(10));
 		o1.setUsername(RandomString.make(10));
 		o1.setPassword(RandomString.make(10));
+		o1.setNom("Miller");
+		o1.setEmail("op1@gmail.com");
+		o1.setAdresse("foire au saucisses");
+		o1.setTelephone("+2120998998889");
 		
 		Operateur o2=new Operateur();
 		o2.setRole(RandomString.make(10));
+		o2.setNom("Morris");
+		o2.setEmail("op2@gmail.com");
+		o2.setAdresse("rue du man");
+		o2.setTelephone("+2120998998989");
 		o2.setUsername(RandomString.make(10));
 		o2.setPassword(RandomString.make(10));
 		o1.setCin(RandomString.make(15));
 		o2.setCin(RandomString.make(15));
+		Operateur o3=new Operateur();
+		o3.setRole(RandomString.make(10));
+		o3.setNom("Zineb");
+		o3.setEmail("op3@gmail.com");
+		o3.setAdresse("rue du loup");
+		o3.setTelephone("+2120933998989");
+		o3.setUsername(RandomString.make(10));
+		o3.setPassword(RandomString.make(10));
+		o3.setCin(RandomString.make(15));
+		
+		Operateur o4=new Operateur();
+		o4.setRole(RandomString.make(10));
+		o4.setNom("AL Rezanhi");
+		o4.setEmail("op4@gmail.com");
+		o4.setAdresse("rue du louvre");
+		o4.setTelephone("+2120998998939");
+		o4.setUsername(RandomString.make(10));
+		o4.setPassword(RandomString.make(10));
+		o4.setCin(RandomString.make(15));
+		
 		operateurR.save(o1);
 		operateurR.save(o2);
+		operateurR.save(o3);
+		operateurR.save(o4);
 		
 		Recharge r1=new Recharge(1L,3000.0,2950.0,d2,"",null,compte,o1);
 		Recharge r2=new Recharge(2L,9000.0,8950.0,d3,"",null,compte,o1);
@@ -294,6 +324,8 @@ public class EBankingApplication implements CommandLineRunner {
 		compteR.save(compte);
 		compteR.save(compte3);
 		compteR.save(compte2);
+		
+		//http://localhost:4200/client/:1/accountForm
 		
 	
 		

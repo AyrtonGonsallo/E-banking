@@ -3,9 +3,10 @@ package com.projetJEE.Ebanking.Dao;
 import com.projetJEE.Ebanking.entities.*;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
-
+@CrossOrigin("*")
 public interface DeviseRepository extends JpaRepository<Devise, Long> {
 
 	
