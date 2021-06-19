@@ -1,6 +1,7 @@
 package com.projetJEE.Ebanking.controllers;
 
-import java.util.*;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,12 @@ public class ClientController {
 			
 			
 			
-			/*@GetMapping("/clients/{id}/comptes")
+			@GetMapping("/client/{id}/comptes")
 			@ResponseStatus(HttpStatus.OK)
 			public List<Compte> getComptes(@PathVariable(name="id") Long id) throws NotFoundException
 			{
 				return service.getComptes(id);
-			}*/
+			}
 			
 		
 		

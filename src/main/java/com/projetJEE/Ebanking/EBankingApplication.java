@@ -73,7 +73,7 @@ public class EBankingApplication implements CommandLineRunner {
 		String[] passwords={"madagascar","allen","jones",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
 		
 		//pour recuperer le id des articles 
-		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class,Agence.class);
+		rrc.exposeIdsFor(Client.class,Compte.class,Agent.class,Virement.class,Agence.class,Operation.class,Operateur.class);
 		List<Client>clients=new ArrayList<Client>();
 		List<Agent>agents=new ArrayList<Agent>();
 		List<Compte>comptes1=new ArrayList<Compte>();
@@ -83,6 +83,7 @@ public class EBankingApplication implements CommandLineRunner {
 		List<Compte>comptes5=new ArrayList<Compte>();
 		List<Compte>comptes6=new ArrayList<Compte>();
 		List<Compte>comptes7=new ArrayList<Compte>();
+		
 		List<List<Compte>>comptes=new ArrayList<List<Compte>>();
 		comptes.add(comptes1);
 		comptes.add(comptes2);
@@ -167,17 +168,17 @@ public class EBankingApplication implements CommandLineRunner {
 		
 		//creer les comptes 
 			//devise
-			Devise d=new Devise(1L,"$","Dollar","english","","","","",null,admin2,null,admin1);
-			Devise d2=new Devise(2L,"R","Roupie","english","","","","",null,admin2,null,admin1);
-			Devise d3=new Devise(3L,"€","Euro","francais","","","","",null,admin2,null,admin1);
-			Devise d4=new Devise(4L,"£","Deutshe Mark","allemand","","","","",null,admin2,null,admin1);
+			Devise d=new Devise(1L,"USD","Dollar","english","","","","",null,admin2,null,admin1);
+			Devise d2=new Devise(2L,"INR","Roupie","english","","","","",null,admin2,null,admin1);
+			Devise d3=new Devise(3L,"EUR","Euro","francais","","","","",null,admin2,null,admin1);
+			Devise d4=new Devise(4L,"DEM","Deutshe Mark","allemand","","","","",null,admin2,null,admin1);
 			deviseR.save(d);
 			deviseR.save(d2);
 			deviseR.save(d3);
 			deviseR.save(d4);
 			
 				
-			Compte compte=new Compte(1L,RandomString.make(10),"epargne",2000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
+			Compte compte=new Compte(1L,RandomString.make(10),"epargne",5000.0,d,null,clients.get(0),agents.get(1),null,null,null,null);
 			comptes1.add(compte);
 			clients.get(0).setComptes(comptes1);
 			clients.get(0).setAgence(agence1);
@@ -227,11 +228,11 @@ public class EBankingApplication implements CommandLineRunner {
 			
 			
 			//operation
-			Operation op1=new Operation(1L,compte,null,2000.0,1999.0,"recharge",d);
-			Operation op2=new Operation(2L,compte,null,3000.0,2999.0,"recharge",d2);
-			Operation op3=new Operation(3L,compte,null,4000.0,3999.0,"recharge",d3);
-			Operation op4=new Operation(4L,compte2,null,2000.0,1999.0,"recharge",d);
-			Operation op5=new Operation(5L,compte3,null,2000.0,1999.0,"recharge",d);
+			Operation op1=new Operation(1L,compte,null,2000.0,1999.0,"Versement",d);
+			Operation op2=new Operation(2L,compte,null,3000.0,2999.0,"Retrait",d2);
+			Operation op3=new Operation(3L,compte,null,4000.0,3999.0,"Versement",d3);
+			Operation op4=new Operation(4L,compte2,null,2000.0,1999.0,"Versement",d);
+			Operation op5=new Operation(5L,compte3,null,2000.0,1999.0,"Versement",d);
 			operations1.add(op1);
 			operations1.add(op2);
 			operations1.add(op3);
@@ -270,6 +271,16 @@ public class EBankingApplication implements CommandLineRunner {
 		o1.setEmail("op1@gmail.com");
 		o1.setAdresse("foire au saucisses");
 		o1.setTelephone("+2120998998889");
+		operateurR.save(o1);
+		//comptes des operateurs
+		List<Compte>comptes_operateur1=new ArrayList<Compte>();
+				
+		Compte compte_operateur1=new Compte(20L,RandomString.make(10),"epargne",5000.0,d,null,o1,agents.get(1),null,null,null,null);
+		compteR.save(compte_operateur1);
+		comptes_operateur1.add(compte_operateur1);
+		o1.setComptes(comptes_operateur1);
+		o1.setAgence(agence1);
+		o1.setCreationAgent(agents.get(0));
 		
 		Operateur o2=new Operateur();
 		o2.setRole(RandomString.make(10));

@@ -22,7 +22,7 @@ public class Devise {
 	@Column(name="ID_DEVISE")
 	Long id;
 	
-	@Column(name="CODE_DEVISE", unique=true)
+	@Column(name="CODE_DEVISE")
 	String code;
 	
 	@Column(name="NOM_DEVISE")
