@@ -69,7 +69,9 @@ public class AgentService {
 		agent.setRole("Agent");
 		
 		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		//a regler
+				//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+				Admin admin = adminService.getByUsername("root");
 		
 		agent.setCreationAdmin(admin);
 		
@@ -123,8 +125,10 @@ public class AgentService {
 		Agent agent=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun agent avec l'id "+id+" n'est trouvé"));
 		rep.delete(agent);
 		
-		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		//logger.debug("L'administrateur "+admin.getNom()+" "+admin.getPrenom()+" ayant le Username "+admin.getUsername()+" a supprimé l'agent avec le username "+agent.getUsername());
+		//a regler
+				//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+				Admin admin = adminService.getByUsername("root");
+		logger.debug("L'administrateur "+admin.getNom()+" "+admin.getPrenom()+" ayant le Username "+admin.getUsername()+" a supprimé l'agent avec le username "+agent.getUsername());
 	}
 
 }

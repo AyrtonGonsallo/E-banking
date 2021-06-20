@@ -78,7 +78,7 @@ public class AdminService {
 			//emailService.sendAuthenticationInfos(admin);
 		}
 		
-		Admin user = getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin user = getByUsername("root");
 		logger.debug("L'administrateur "+user.getNom()+" "+user.getPrenom()+" ayant le Username "+user.getUsername()+" a créé l'administrateur avec le username "+admin.getUsername());
 		
 	}
@@ -108,8 +108,8 @@ public class AdminService {
 		if(admin.getPassword()!=null && !admin.getPassword().isEmpty()) updated.setPassword(admin.getPassword());
 		else updated.setPassword(null);
 		//emailService.sendAuthenticationInfos(updated);
-		
-		Admin user = getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin user = getByUsername("root");
+		//Admin user = getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'administrateur "+user.getNom()+" "+user.getPrenom()+" ayant le Username "+user.getUsername()+" a modifié l'administrateur avec le username "+updated.getUsername());
 		
 	}
@@ -120,8 +120,8 @@ public class AdminService {
 		//vérifier l'existence de l'administrateur
 		Admin admin=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun administrateur avec l'id "+id+" n'est trouvé"));
 		rep.delete(admin);
-		
-		Admin user = getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin user = getByUsername("root");
+		//Admin user = getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'administrateur "+user.getNom()+" "+user.getPrenom()+" ayant le Username "+user.getUsername()+" a supprimé l'administrateur avec le username "+admin.getUsername());
 	}
 

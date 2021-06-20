@@ -45,7 +45,7 @@ public class AgentController {
 		
 		//POST
 			
-			@PostMapping("/agents")
+			@RequestMapping(value = "/agents/save" , method = RequestMethod.POST, consumes = { "application/json"})//"multipart/form-data" ,"application/json"
 			@ResponseStatus(HttpStatus.CREATED)
 			public void addAgent(@RequestBody Agent agent)  throws AlreadyExistsException
 			{

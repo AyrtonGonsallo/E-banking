@@ -37,7 +37,7 @@ public class DeviseController {
 	
 	//POST
 
-		@PostMapping("/devises")
+		@RequestMapping(value = "/devises/save" , method = RequestMethod.POST, consumes = { "application/json"})//"multipart/form-data" ,"application/json"
 		@ResponseStatus(HttpStatus.CREATED)
 		public void addCurrency(@RequestBody Devise devise) throws AlreadyExistsException
 		{
@@ -48,7 +48,7 @@ public class DeviseController {
 	
 	//PUT
 		
-		@PutMapping("/devise/{code}")
+		@PutMapping("/devises/update/{code}")
 		@ResponseStatus(HttpStatus.OK)
 		public void updateCurrency(@PathVariable String code , @RequestBody Devise devise)  throws NotFoundException, AlreadyExistsException
 		{

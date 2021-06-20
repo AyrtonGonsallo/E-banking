@@ -87,8 +87,9 @@ public class DeviseService {
 		if(rep.findByAlphaCodeAndBankCodeAndLangue(devise.getAlphaCode(), devise.getBankCode(), devise.getLangue()).isPresent())
 			throw new AlreadyExistsException("Cette devise ne respecte pas l'unicité du Code Alpha");
 		
-		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		//a regler
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin admin = adminService.getByUsername("root");
 		
 		devise.setCreationAdmin(admin);
 		devise.setModificationAdmin(admin);
@@ -133,7 +134,8 @@ public class DeviseService {
 		//modifier les données
 		
 		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+				Admin admin = adminService.getByUsername("root");
 		
 		updated.setModificationAdmin(admin);
 		updated.setModificationDate(LocalDateTime.now());
@@ -158,7 +160,8 @@ public class DeviseService {
 		Devise devise=rep.findByCode(code).orElseThrow(() -> new NotFoundException("Aucune devise avec le code "+code+" n'est trouvée"));
 		rep.delete(devise);		
 		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+				Admin admin = adminService.getByUsername("root");
 		logger.debug("L'administrateur "+admin.getNom()+" "+admin.getPrenom()+" ayant le Username "+admin.getUsername()+" a supprimé la devise "+devise.getCode());
 		
 	}

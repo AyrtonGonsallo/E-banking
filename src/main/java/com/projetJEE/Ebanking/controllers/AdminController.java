@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.projetJEE.Ebanking.entities.*;
 import com.projetJEE.Ebanking.services.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 public class AdminController {
 	
@@ -42,7 +42,7 @@ public class AdminController {
 		
 		//POST
 			
-			@PostMapping("/admins")
+			@RequestMapping(value = "/admins/save" , method = RequestMethod.POST, consumes = { "application/json"})//"multipart/form-data" ,"application/json"
 			@ResponseStatus(HttpStatus.CREATED)
 			public void addAdmin(@RequestBody Admin admin)
 			{

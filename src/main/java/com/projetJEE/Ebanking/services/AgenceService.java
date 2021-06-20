@@ -67,8 +67,8 @@ public class AgenceService {
 			throw new AlreadyExistsException("Une agence avec le Nom "+agence.getNom()+" existe déjà");
 		}
 		
-		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin admin = adminService.getByUsername("root");
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		
 		agence.setCreationAdmin(admin);
 		
@@ -100,7 +100,8 @@ public class AgenceService {
 		
 		rep.save(updated);
 		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin admin = adminService.getByUsername("root");
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'administrateur "+admin.getNom()+" "+admin.getPrenom()+" ayant le Username "+admin.getUsername()+" a modifié l'agence "+updated.getNom());
 		
 	}
@@ -112,7 +113,8 @@ public class AgenceService {
 		Agence agence=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucune agence avec l'id "+id+" n'est trouvé"));
 		rep.delete(agence);
 		
-		Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Admin admin = adminService.getByUsername("root");
+		//Admin admin = adminService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'administrateur "+admin.getNom()+" "+admin.getPrenom()+" ayant le Username "+admin.getUsername()+" a supprimé l'agence "+agence.getNom());
 	}
 

@@ -49,8 +49,7 @@ public class AgenceController {
 		
 		
 		//POST
-			
-			@PostMapping("/agences")
+			@RequestMapping(value = "/agences/save" , method = RequestMethod.POST, consumes = { "application/json"})//"multipart/form-data" ,"application/json"
 			@ResponseStatus(HttpStatus.CREATED)
 			public void addAgence(@RequestBody Agence agence)  throws AlreadyExistsException, NotFoundException
 			{

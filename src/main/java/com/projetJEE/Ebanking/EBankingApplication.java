@@ -129,18 +129,28 @@ public class EBankingApplication implements CommandLineRunner {
 		
 			//un admin
 			Admin admin1=new Admin();
-			admin1.setPassword(RandomString.make(18));
-			admin1.setUsername(RandomString.make(18));
+			admin1.setPassword("admin");
+			admin1.setNom("Caleta Car");
+			admin1.setPrenom("Duje");
+			admin1.setAdresse("rue du man");
+			admin1.setEmail("iezae@gmail.com");
+			admin1.setTelephone("+212 67876787");
+			admin1.setUsername("root");
 			admin1.setRole("admin");
 			//un admin2
 			Admin admin2=new Admin();
-			admin2.setPassword(RandomString.make(18));
-			admin2.setUsername(RandomString.make(18));
+			admin2.setPassword("password");
+			admin2.setNom("Drake");
+			admin2.setPrenom("Domen");
+			admin2.setAdresse("rue du louvre");
+			admin2.setEmail("iefdsfsd@gmail.com");
+			admin2.setTelephone("+212 67886787");
+			admin2.setUsername("user");
 			admin2.setRole("admin");
 			adminR.save(admin1);
 			adminR.save(admin2);
 			//creer une agence
-			Agence 	agence1=new Agence(1L,"principale","","","","",admin1,null,clients);
+			Agence 	agence1=new Agence(1L,"principale","sidi abbad","+2127837278","663253","agence1@gmail.com",admin1,null,clients);
 		//creer des agents
 			String[] nomsA={"karl","Allen","Jonzdzes",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
 			String[] prenomsA={"marcos","Paul","dqsn",RandomString.make(12),RandomString.make(12),RandomString.make(12),RandomString.make(12)};
@@ -168,10 +178,10 @@ public class EBankingApplication implements CommandLineRunner {
 		
 		//creer les comptes 
 			//devise
-			Devise d=new Devise(1L,"USD","Dollar","english","","","","",null,admin2,null,admin1);
-			Devise d2=new Devise(2L,"INR","Roupie","english","","","","",null,admin2,null,admin1);
-			Devise d3=new Devise(3L,"EUR","Euro","francais","","","","",null,admin2,null,admin1);
-			Devise d4=new Devise(4L,"DEM","Deutshe Mark","allemand","","","","",null,admin2,null,admin1);
+			Devise d=new Devise(1L,"USD","Dollar","english","@66576","ISO 3166","B65657","US",null,admin2,null,admin1);
+			Devise d2=new Devise(2L,"INR","Roupie","english","@6767'","ISO 3366","B65657","IN",null,admin2,null,admin1);
+			Devise d3=new Devise(3L,"EUR","Euro","francais","@766767","ISO 3266","B65657","EU",null,admin2,null,admin1);
+			Devise d4=new Devise(4L,"DEM","Deutshe Mark","allemand","@76767","ISO 3162","B65657","DE",null,admin2,null,admin1);
 			deviseR.save(d);
 			deviseR.save(d2);
 			deviseR.save(d3);
