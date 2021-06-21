@@ -147,8 +147,8 @@ public class CompteService {
 			throw new AlreadyExistsException("Un compte avec le Numero "+compte.getNumero()+" existe déjà");
 		}
 
-
-		Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Agent agent = agentService.getByUsername("alain");
+		//Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
 		compte.setCreationAgent(agent);
 		compte.setCreationDate(LocalDateTime.now());
@@ -191,8 +191,8 @@ public class CompteService {
 		//vérifier l'existence de l'compte
 		Compte compte=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun compte avec l'id "+id+" n'est trouvé"));
 		rep.delete(compte);
-
-		Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Agent agent = agentService.getByUsername("alain");
+		//Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a supprimé le compte: "+compte.getNumero());
 	}
 	
@@ -213,7 +213,8 @@ public class CompteService {
 		  ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
 		    new InputStreamResource(pdfFile.getInputStream()), HttpStatus.OK);
 		  
-		  Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		  Agent agent = agentService.getByUsername("alain");
+			//Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		  logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a téléchargé le fichier "+fileName+" à la date: "+LocalDateTime.now());
 		  
 		  return response;

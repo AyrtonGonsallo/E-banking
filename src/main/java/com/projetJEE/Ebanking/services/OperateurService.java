@@ -139,8 +139,8 @@ public class OperateurService {
 		//vérifier l'existence du operateur
 		Operateur operateur=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun opérateur avec l'id "+id+" n'est trouvé"));
 		rep.delete(operateur);
-		
-		Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		Agent agent = agentService.getByUsername("alain");
+		//Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a supprimé l'opérateur avec le username "+operateur.getUsername());
 
 	}

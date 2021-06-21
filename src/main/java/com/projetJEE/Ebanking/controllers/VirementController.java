@@ -34,7 +34,7 @@ public class VirementController {
 			}
 			
 			
-			@GetMapping(value="/virementPDF/{id}", produces = "application/pdf")
+			@GetMapping(value="/virementsPDF/{id}", produces = "application/pdf")
 			@ResponseStatus(HttpStatus.OK)
 			public ResponseEntity<InputStreamResource> getRecuVirementPDF(@PathVariable(name="id") Long id) throws IOException
 			{

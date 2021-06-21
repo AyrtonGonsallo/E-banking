@@ -114,7 +114,8 @@ public class VirementService {
 		  ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
 		    new InputStreamResource(pdfFile.getInputStream()), HttpStatus.OK);
 		  
-		  Client client = clientService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		 // Client client = clientService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		  Client client = clientService.getByUsername(debiteur.getProprietaire().getUsername());
 		logger.debug("Le client "+client.getNom()+" "+client.getPrenom()+" ayant le Username "+client.getUsername()+" a téléchargé le fichier "+fileName+" à la date: "+LocalDateTime.now());
 			
 		  

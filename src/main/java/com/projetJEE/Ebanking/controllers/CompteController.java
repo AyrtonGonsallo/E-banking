@@ -121,7 +121,7 @@ public class CompteController {
 			
 		//DELETE
 			
-			@DeleteMapping("/comptes/del/{id}")
+			@DeleteMapping("/comptes/delete/{id}")
 			@ResponseStatus(HttpStatus.OK)
 			public void deleteCompte(@PathVariable Long id) throws NotFoundException
 			{

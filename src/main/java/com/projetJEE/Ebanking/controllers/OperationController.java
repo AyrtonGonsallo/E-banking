@@ -29,7 +29,7 @@ public class OperationController {
 			
 			
 			
-			@GetMapping(value="/operationPDF/{id}", produces = "application/pdf")
+			@GetMapping(value="/operationsPDF/{id}", produces = "application/pdf")
 			@ResponseStatus(HttpStatus.OK)
 			public ResponseEntity<InputStreamResource> getRecuOperationPDF(@PathVariable(name="id") Long id) throws IOException
 			{

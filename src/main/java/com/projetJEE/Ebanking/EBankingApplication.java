@@ -1,5 +1,6 @@
 package com.projetJEE.Ebanking;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -232,6 +233,8 @@ public class EBankingApplication implements CommandLineRunner {
 			//Virement 
 			Virement v1=new Virement(1L,compte,compte3,null,1200.0,1200.0);
 			Virement v2=new Virement(2L,compte,compte2,null,1500.0,1500.0);
+			v1.setDate(LocalDateTime.now());
+			v2.setDate(LocalDateTime.now());
 			virementR.save(v1);
 			virementR.save(v2);
 			
@@ -327,10 +330,10 @@ public class EBankingApplication implements CommandLineRunner {
 		operateurR.save(o3);
 		operateurR.save(o4);
 		
-		Recharge r1=new Recharge(1L,3000.0,2950.0,d2,"",null,compte,o1);
-		Recharge r2=new Recharge(2L,9000.0,8950.0,d3,"",null,compte,o1);
-		Recharge r3=new Recharge(3L,5000.0,4950.0,d,"",null,compte3,o1);
-		Recharge r4=new Recharge(4L,4000.0,3950.0,d4,"",null,compte2,o1);
+		Recharge r1=new Recharge(1L,3000.0,2950.0,d2,"+212 7668733",LocalDateTime.now(),compte,o1);
+		Recharge r2=new Recharge(2L,9000.0,8950.0,d3,"+212 7128733",LocalDateTime.now(),compte,o1);
+		Recharge r3=new Recharge(3L,5000.0,4950.0,d,"+212 7228733",LocalDateTime.now(),compte3,o1);
+		Recharge r4=new Recharge(4L,4000.0,3950.0,d4,"+212 7662233",LocalDateTime.now(),compte2,o1);
 		rechargeR.save(r1);
 		rechargeR.save(r2);
 		rechargeR.save(r3);

@@ -69,7 +69,7 @@ public class ClientController {
 			
 		//DELETE
 			
-			@DeleteMapping("/clients/del/{id}")
+			@DeleteMapping("/clients/delete/{id}")
 			@ResponseStatus(HttpStatus.OK)
 			public void deleteClient(@PathVariable(name="id") Long id) throws NotFoundException
 			{

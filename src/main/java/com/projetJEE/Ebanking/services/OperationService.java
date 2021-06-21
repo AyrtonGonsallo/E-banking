@@ -111,7 +111,7 @@ public class OperationService {
 		
 		compteService.rep.save(compte);
 		
-		//recuService.CreateRecu(operation);
+		recuService.CreateRecu(operation);
 		
 		
 //		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()
@@ -135,8 +135,8 @@ public class OperationService {
 		
 		  ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
 		    new InputStreamResource(pdfFile.getInputStream()), HttpStatus.OK);
-		  
-		  Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		  Agent agent = agentService.getByUsername("alain");
+		  //Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a téléchargé le fichier "+fileName+" à la date: "+LocalDateTime.now());
 			
 		  

@@ -145,9 +145,9 @@ public class ClientService {
 		//vérifier l'existence du client
 		Client client=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun client avec l'id "+id+" n'est trouvé"));
 		rep.delete(client);
-		
+		Agent agent = agentService.getByUsername("alain");
 		//Agent agent = agentService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		//logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a supprimé le client avec le username "+client.getUsername());
+		logger.debug("L'agent "+agent.getNom()+" "+agent.getPrenom()+" ayant le Username "+agent.getUsername()+" a supprimé le client avec le username "+client.getUsername());
 
 	}
 	
